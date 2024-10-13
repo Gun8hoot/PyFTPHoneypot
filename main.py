@@ -48,6 +48,11 @@ def main():
 if __name__ == '__main__':
     try:
         print(color.fr_purple, banner, f'\n{color.reset}')
-        main()
+        # TO REMOVE WHEN IT'S FINISH
+        choise = input(f'{color.fr_red} ⚠️ THIS PROGRAM IS NOT FINISH, IF YOU NEED AN HONEYPOT GO TO THE AWESOME HONEYPOTS REPO, PRESS Y TO EXECUTE ! ⚠️\n{color.reset}')
+        if choise == 'Y' or choise == 'y':
+            main()
+        else:
+            print(f'\033[A\n{color.fr_red} [!] ABORDING ...{color.reset}')
     except KeyboardInterrupt:
         print(f'\033[A\n{color.fr_red} [!] Keyboard interrupt keys pressed{color.reset}')
