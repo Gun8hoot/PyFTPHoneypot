@@ -1,6 +1,9 @@
+#!/bin/env python3
+
 # IMPORTING MODULE
-import os, sys, threading, ftplib, socket, time, base64
+import os, sys, threading, ftplib, socket, time, base64, string
 from module.color import color
+import netifaces as ni
 
 # VARIABLE
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -8,13 +11,19 @@ LHOST = str(sys.argv[2])
 LPORT = 21
 RPORT = 20
 
+# CHECK IF LHOST IS AN INTERFACE
+if LHOST and LHOST[0].islower():
+    LHOST = ni.ifaddresses(LHOST)[ni.AF_INET][0]['addr']
+else:
+    pass
 
-# FONCTION
-with open('./banner.deco', 'r') as PB:
-    banner = PB.read()
+# BANNER
+with open('./banner.deco', 'r') as TMP:
+    banner = TMP.read()
 
 def arg():
     if sys.argv[1] != '-a':
+        print('\033[A\033[A')
         print(f' {color.bold_on}pyFTPHoneypot{color.reset}, a simple FTP honeypot write in python3:\n   -a : Specify the your address or the network interface to use.\n\n   Example: python3 ./main.py -a 127.0.O.1\n            python3 ./main.py -a wlan0')
         sys.exit()
     elif sys.argv[1] == '-a':
